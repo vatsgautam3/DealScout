@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DealScout - Global E-Commerce Price Comparator & Alert Tracker | Gautam Vats Portfolio Showcase</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          },
+          animation: {
+            'marquee': 'marquee 30s linear infinite',
+            'slide-up': 'slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'slide-down': 'slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+          },
+          keyframes: {
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' }
+            },
+            slideUp: {
+              from: { opacity: '0', transform: 'translateY(20px)' },
+              to: { opacity: '1', transform: 'translateY(0)' }
+            },
+            slideDown: {
+              from: { opacity: '0', transform: 'translateY(-20px)' },
+              to: { opacity: '1', transform: 'translateY(0)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- ========================================== -->
+  <!-- RECRUITER & PORTFOLIO SHOWCASE BANNER -->
+  <!-- ========================================== -->
+  <aside aria-label="Recruiter showcase notes" class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white border-b border-indigo-500/30 px-4 py-2.5 shadow-md">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-2.5">
+        <span class="px-2 py-0.5 rounded-full bg-emerald-500 text-slate-950 font-extrabold uppercase tracking-wider text-[10px] animate-pulse">
+          Portfolio Showcase
+        </span>
+        <span class="font-bold text-sm">DealScout</span>
+        <span class="text-slate-300 hidden sm:inline">• Built by <b class="text-white">Gautam Vats</b> (<a href="mailto:vatsgautam3@gmail.com" class="text-indigo-300 hover:underline">vatsgautam3@gmail.com</a>)</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a href="/api/download-word" download="DealScout-Full-Codebase.docx" class="px-2.5 py-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg shadow-sm transition-all flex items-center gap-1.5 cursor-pointer text-xs">
+          <span>📄</span>
+          <span>Download Word File (.docx)</span>
+        </a>
+        <button onclick="openArchitectureModal()" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg shadow-sm transition-all flex items-center gap-1.5 cursor-pointer">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span>Architecture & Design</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================== -->
+  <!-- LIVE TICKER BAR -->
+  <!-- ========================================== -->
+  <div class="bg-slate-950 text-white text-[11px] py-1 px-4 overflow-hidden border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="font-bold text-emerald-400 uppercase tracking-wider text-[10px]">
+          ⚡ Live Radar
+        </span>
+      </div>
+      <div class="overflow-hidden whitespace-nowrap text-slate-300">
+        <span class="inline-block animate-marquee">
+          🔥 <b>Blinkit:</b> Cadbury Silk down to ₹155 (Cold Pack in 10m) &nbsp;•&nbsp; 📱 <b>Flipkart:</b> iPhone 16 Pro ₹5,000 instant bank discount &nbsp;•&nbsp; 👗 <b>Myntra:</b> Levi's 511 Denim at 51% OFF &nbsp;•&nbsp; 🥑 <b>BigBasket:</b> Fortune Sunflower Oil 5L down to ₹625 &nbsp;•&nbsp; 🎧 <b>Amazon:</b> Sony XM5 down to ₹24,990! &nbsp;•&nbsp; 🛍️ <b>Meesho:</b> boAt Rockerz unbranded clones from ₹699!
+        </span>
+      </div>
+      <span class="hidden sm:inline text-[10px] text-slate-400 shrink-0">Amazon • Flipkart • Blinkit • BigBasket • Myntra • Meesho</span>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MAIN NAVBAR -->
+  <!-- ========================================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="font-black text-xl tracking-tight text-slate-950">Deal<span class="text-indigo-600">Scout</span></span>
+            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-1.5 py-0.2 rounded border border-emerald-300">GLOBAL</span>
+          </div>
+          <p class="hidden sm:block text-[10px] text-slate-500 leading-none">Amazon • Flipkart • Blinkit • BigBasket • Myntra • Meesho</p>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Currency Selector -->
+        <div class="flex items-center bg-slate-100 rounded-xl px-2.5 py-1.5 border border-slate-200 text-xs font-semibold">
+          <span class="text-slate-400 mr-1.5">🌐</span>
+          <select id="currencySelect" onchange="changeCurrency(this.value)" class="bg-transparent text-slate-800 font-bold cursor-pointer focus:outline-none">
+            <option value="INR" selected>INR (₹)</option>
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="AED">AED</option>
+            <option value="CAD">CAD (CA$)</option>
+          </select>
+        </div>
+
+        <!-- Price Alerts Button -->
+        <button onclick="openAlertsModal()" class="p-2 sm:px-3 sm:py-2 rounded-xl border border-slate-200 hover:bg-slate-100 text-slate-700 text-xs font-semibold flex items-center gap-1.5 cursor-pointer">
+          <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+          <span class="hidden md:inline">Alerts</span>
+          <span id="alertsBadge" class="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500 text-slate-950">1</span>
+        </button>
+
+        <!-- Multi-Store Basket Button -->
+        <button onclick="openBasketModal()" class="p-2 sm:px-3 sm:py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold flex items-center gap-2 shadow-sm cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+          <span class="hidden md:inline">Basket</span>
+          <span id="basketBadge" class="bg-white text-indigo-700 text-[10px] font-extrabold px-1.5 py-0.5 rounded-full">2</span>
+          <span id="basketSubtotalText" class="hidden lg:inline text-[11px] text-indigo-200 border-l border-indigo-400/40 pl-2">₹935</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- HERO SECTION -->
+  <!-- ========================================== -->
+  <section class="py-8 sm:py-12 bg-gradient-to-b from-indigo-50/70 via-white to-white border-b border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold mb-3">
+        <span>⚡ Real-Time Price Radar across 6 Top Indian & Global Marketplaces</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight leading-tight">
+        Compare Any Product. <br class="hidden sm:inline">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-emerald-600">
+          Buy at the Absolute Cheapest Price.
+        </span>
+      </h1>
+
+      <p class="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
+        Live side-by-side comparison across <b>Amazon</b>, <b>Flipkart</b>, <b>Blinkit (10-min)</b>, <b>BigBasket</b>, <b>Myntra</b>, and <b>Meesho</b> with coupon tracker and automatic price drop alerts.
+      </p>
+
+      <!-- Search Input -->
+      <div class="mt-7 max-w-3xl mx-auto">
+        <div class="relative flex items-center shadow-lg shadow-indigo-500/5 rounded-2xl bg-white border-2 border-indigo-500/30 focus-within:border-indigo-600 p-1.5 sm:p-2 transition-all">
+          <div class="pl-3 pr-2 text-slate-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <input
+            id="searchInput"
+            type="text"
+            oninput="handleSearchInput(this.value)"
+            placeholder="Search product (e.g. iPhone 16, Sunflower Oil, Nike Shoes, Cadbury Silk) or paste link..."
+            class="w-full bg-transparent text-sm sm:text-base text-slate-900 placeholder-slate-400 focus:outline-none py-2"
+          >
+          <button onclick="executeSearch()" class="ml-2 px-5 py-2.5 sm:py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-sm transition-all shrink-0 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <span>Compare Live</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Platform badges -->
+      <div class="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs">
+        <span class="text-slate-400 font-medium">Scouting:</span>
+        <span class="px-2.5 py-0.5 rounded-full font-bold text-[11px] bg-amber-500 text-slate-950">Amazon</span>
+        <span class="px-2.5 py-0.5 rounded-full font-bold text-[11px] bg-blue-600 text-white">Flipkart</span>
+        <span class="px-2.5 py-0.5 rounded-full font-bold text-[11px] bg-yellow-400 text-slate-950">Blinkit (10-Min)</span>
+        <span class="px-2.5 py-0.5 rounded-full font-bold text-[11px] bg-emerald-600 text-white">BigBasket</span>
+        <span class="px-2.5 py-0.5 rounded-full font-bold text-[11px] bg-rose-500 text-white">Myntra</span>
+        <span class="px-2.5 py-0.5 rounded-full font-bold text-[11px] bg-fuchsia-600 text-white">Meesho</span>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div id="categoryContainer" class="mt-6 flex items-center justify-center gap-2 overflow-x-auto pb-2 no-scrollbar">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- MAIN CONTENT CONTAINER -->
+  <!-- ========================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+
+    <!-- Flash Deals Section -->
+    <section class="bg-gradient-to-r from-rose-500/5 via-amber-500/5 to-indigo-500/5 rounded-2xl p-5 sm:p-6 border border-rose-200 mb-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="p-1 rounded-lg bg-rose-500 text-white">🔥</span>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900">Live Flash Discounts of the Hour</h3>
+            <span class="text-[10px] bg-rose-500 text-white font-bold px-2 py-0.5 rounded-full animate-pulse">UP TO 70% OFF</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-0.5">Real-time verified discounts across Amazon, Blinkit, Myntra, Flipkart, BigBasket, and Meesho</p>
+        </div>
+      </div>
+      <div id="flashDealsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- Controls Bar -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-200">
+      <div class="flex items-center gap-2">
+        <h2 id="sectionTitle" class="text-lg sm:text-xl font-black text-slate-900">All Live Products</h2>
+        <span id="resultsCountBadge" class="text-xs bg-slate-200 text-slate-700 font-bold px-2 py-0.5 rounded-full">8 Results</span>
+      </div>
+
+      <div class="flex items-center gap-2 text-xs">
+        <span class="text-slate-500">Sort by:</span>
+        <select id="sortSelect" onchange="handleSortChange(this.value)" class="bg-white border border-slate-200 rounded-xl px-3 py-1.5 font-semibold text-slate-800 cursor-pointer focus:outline-none">
+          <option value="cheapest">Cheapest Price First</option>
+          <option value="discount">Highest Discount %</option>
+          <option value="rating">Top Customer Rating</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Products Comparison List -->
+    <div id="productsList" class="flex flex-col gap-6">
+      <!-- Injected via JS -->
+    </div>
+  </main>
+
+  <!-- ========================================== -->
+  <!-- FLOATING BASKET ACTION BAR -->
+  <!-- ========================================== -->
+  <aside id="floatingBasketBar" aria-label="Shopping basket summary" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-30 max-w-md w-[92%] sm:w-auto">
+    <div class="bg-slate-950 text-white backdrop-blur-md px-4 py-2.5 rounded-2xl border border-slate-800 shadow-2xl flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5">
+        <span class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center text-white">🛒</span>
+        <div>
+          <div id="floatingBasketTitle" class="text-xs font-bold">2 Items in Multi-Store Cart</div>
+          <div class="text-[11px] text-emerald-400 font-semibold">Comparing across Amazon, Blinkit, BigBasket & more</div>
+        </div>
+      </div>
+      <button onclick="openBasketModal()" class="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-xs flex items-center gap-1 shadow-sm transition-colors cursor-pointer">
+        <span>Optimize Cart</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ========================================== -->
+  <!-- BASKET OPTIMIZER MODAL -->
+  <!-- ========================================== -->
+  <div id="basketModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/60 backdrop-blur-xs">
+    <div class="bg-white rounded-2xl max-w-3xl w-full border border-slate-200 shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+      <div class="p-4 sm:p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-600/10 border border-indigo-600/30 flex items-center justify-center text-indigo-600 text-xl font-bold">🛒</div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-bold text-slate-900 text-base sm:text-lg">Multi-Store Basket Optimizer</h3>
+              <span id="basketModalCount" class="text-xs bg-indigo-100 text-indigo-700 font-semibold px-2 py-0.5 rounded-full">2 Products</span>
+            </div>
+            <p class="text-xs text-slate-500">Compare total checkout costs across 6 platforms simultaneously</p>
+          </div>
+        </div>
+        <button onclick="closeBasketModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 text-lg font-bold">✕</button>
+      </div>
+
+      <!-- Strategy Banner -->
+      <div class="p-3 sm:p-4 bg-gradient-to-r from-emerald-600 to-teal-700 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <div class="text-xs uppercase tracking-wider text-emerald-100 font-medium">Smart Multi-Store Strategy</div>
+          <div id="optimalBasketSummary" class="text-base font-extrabold">Cheapest Split Total: ₹935</div>
+        </div>
+        <div class="flex items-center bg-black/20 p-1 rounded-xl text-xs font-semibold">
+          <button id="stratSplitBtn" onclick="setBasketStrategy('split')" class="px-3 py-1.5 rounded-lg bg-white text-emerald-900 shadow-xs cursor-pointer">⚡ Smart Split (Best Savings)</button>
+          <button id="stratSingleBtn" onclick="setBasketStrategy('single')" class="px-3 py-1.5 rounded-lg text-emerald-100 hover:text-white cursor-pointer">Single Store Only</button>
+        </div>
+      </div>
+
+      <!-- Body Content -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-5 flex flex-col gap-6">
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">Items in Basket</h4>
+          <div id="basketItemsList" class="flex flex-col gap-2"></div>
+        </div>
+        <div id="basketStrategyDetails" class="flex flex-col gap-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- PRICE ALERT MODAL -->
+  <!-- ========================================== -->
+  <div id="alertModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs">
+    <div class="bg-white rounded-2xl max-w-lg w-full border border-slate-200 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="p-4 sm:p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-600 text-lg">🔔</div>
+          <div>
+            <h3 class="font-bold text-slate-900 text-base">Automatic Price Drop Alerts</h3>
+            <p class="text-xs text-slate-500">Instant audio notification & alert when prices drop</p>
+          </div>
+        </div>
+        <button onclick="closeAlertModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+      </div>
+
+      <div class="p-5 overflow-y-auto flex-1 flex flex-col gap-4">
+        <div id="alertProductCard" class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200">
+          <!-- Filled by JS -->
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1.5">Target Alert Price (INR ₹)</label>
+          <input id="targetPriceInput" type="number" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 font-bold text-slate-900 text-base focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+          <div class="flex items-center gap-2 mt-2 text-xs">
+            <span class="text-slate-500 text-[11px]">Quick presets:</span>
+            <button onclick="applyAlertDiscount(5)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 font-semibold text-slate-700">-5%</button>
+            <button onclick="applyAlertDiscount(10)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 font-semibold text-slate-700">-10%</button>
+            <button onclick="applyAlertDiscount(15)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 font-semibold text-slate-700">-15%</button>
+            <button onclick="applyAlertDiscount(20)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 font-semibold text-slate-700">-20%</button>
+          </div>
+        </div>
+
+        <button onclick="saveActiveAlert()" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer">
+          <span>🔔 Track Price & Arm Alert</span>
+        </button>
+
+        <div class="pt-3 border-t border-slate-200">
+          <h5 class="text-xs font-bold text-slate-600 uppercase mb-2">Simulate Real-Time Trigger (Test Audio Ding):</h5>
+          <button onclick="triggerSimulatedDrop()" class="w-full py-2.5 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 font-semibold text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+            <span>⚡ Test Price Drop Alert Ding (Synthesized Audio)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ALERT TOAST (SOUND + POPUP) -->
+  <!-- ========================================== -->
+  <div id="alertToast" class="hidden fixed bottom-5 right-5 z-50 max-w-sm w-full animate-slide-up">
+    <div class="p-4 rounded-2xl bg-slate-900 text-white border-2 border-emerald-500 shadow-2xl flex flex-col gap-3">
+      <div class="flex items-start justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-slate-950 font-bold shrink-0 animate-bounce">🔔</span>
+          <div>
+            <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-400">Price Drop Alert Triggered!</div>
+            <h5 id="toastTitle" class="text-xs font-bold line-clamp-1 text-white">Product Name</h5>
+          </div>
+        </div>
+        <button onclick="hideToast()" class="text-slate-400 hover:text-white font-bold p-1">✕</button>
+      </div>
+      <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 flex items-center justify-between">
+        <div>
+          <div class="text-[10px] text-slate-400">Target Reached:</div>
+          <div id="toastPrice" class="text-sm font-extrabold text-emerald-400">Now ₹599</div>
+        </div>
+        <span id="toastStore" class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-600 text-white">on BigBasket</span>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="text-[10px] text-slate-400">Guaranteed Lowest Price</span>
+        <button onclick="hideToast()" class="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-xs">Acknowledge</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ARCHITECTURE & SYSTEM DESIGN MODAL (FOR RECRUITERS) -->
+  <!-- ========================================== -->
+  <div id="archModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
+    <div class="bg-white rounded-2xl max-w-2xl w-full border border-slate-200 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="p-5 border-b border-slate-200 flex items-center justify-between bg-slate-900 text-white">
+        <div>
+          <h3 class="font-extrabold text-lg flex items-center gap-2">
+            <span>📐 System Architecture & Design</span>
+            <span class="bg-indigo-500 text-xs px-2 py-0.5 rounded">Gautam Vats</span>
+          </h3>
+          <p class="text-xs text-slate-400">DealScout E-Commerce Price Intelligence & Basket Optimization Engine</p>
+        </div>
+        <button onclick="closeArchitectureModal()" class="text-slate-400 hover:text-white text-xl font-bold">✕</button>
+      </div>
+
+      <div class="p-6 overflow-y-auto space-y-4 text-xs text-slate-700 leading-relaxed">
+        <div class="p-3 bg-indigo-50 rounded-xl border border-indigo-200">
+          <h4 class="font-bold text-indigo-900 text-sm mb-1">1. Problem Statement</h4>
+          <p>Online consumers spend 20+ minutes hopping between Amazon, Flipkart, Myntra, Blinkit, and BigBasket. Quick-commerce (Blinkit 10-min) offers convenience but often differs from warehouse e-commerce (Amazon) by 15-30%. No unified multi-store cart optimizer previously existed to split shopping lists across stores for maximal savings.</p>
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+          <h4 class="font-bold text-slate-900 text-sm mb-1">2. Core Architectural Pillars</h4>
+          <ul class="list-disc list-inside space-y-1">
+            <li><b>Cross-Platform Price Normalizer:</b> Standardizes variant specs, packaging sizes (e.g. 5L jars vs 1L pouches), bank discounts, coupon deductions, and delivery fees.</li>
+            <li><b>Optimal Cart Split Algorithm:</b> Solves multi-store basket cost minimization using a greedy bipartite matching algorithm. Calculates single-store minimum vs multi-store delivery fee trade-offs.</li>
+            <li><b>Synthesized Web Audio Alerts:</b> Avoids bulky audio asset downloads by synthesizing dual-oscillator frequencies (587.33 Hz → 1174.66 Hz) directly in browser memory.</li>
+            <li><b>Real-Time Currency Engine:</b> Instant rate conversion across 6 global fiat currencies with localized symbol placement.</li>
+          </ul>
+        </div>
+
+        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200">
+          <h4 class="font-bold text-emerald-900 text-sm mb-1">3. Candidate Bio & Contact</h4>
+          <p>Built with clean modular principles, responsive design, and rigorous UX standards. Contact: <b>Gautam Vats</b> &lt;<a href="mailto:vatsgautam3@gmail.com" class="text-indigo-600 underline">vatsgautam3@gmail.com</a>&gt;.</p>
+        </div>
+      </div>
+
+      <div class="p-4 border-t border-slate-200 bg-slate-50 flex justify-end">
+        <button onclick="closeArchitectureModal()" class="px-4 py-2 bg-slate-900 text-white rounded-xl font-semibold text-xs">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- JAVASCRIPT LOGIC & SEED DATA -->
+  <!-- ========================================== -->
+  <script>
+    // --- STORES METADATA ---
+    const STORES = {
+      amazon: { name: 'Amazon India', badgeColor: 'bg-amber-500 text-slate-950', website: 'amazon.in' },
+      flipkart: { name: 'Flipkart', badgeColor: 'bg-blue-600 text-white', website: 'flipkart.com' },
+      blinkit: { name: 'Blinkit', badgeColor: 'bg-yellow-400 text-slate-950', website: 'blinkit.com' },
+      bigbasket: { name: 'BigBasket', badgeColor: 'bg-emerald-600 text-white', website: 'bigbasket.com' },
+      myntra: { name: 'Myntra', badgeColor: 'bg-rose-500 text-white', website: 'myntra.com' },
+      meesho: { name: 'Meesho', badgeColor: 'bg-fuchsia-600 text-white', website: 'meesho.com' }
+    };
+
+    // --- CURRENCIES ---
+    const CURRENCIES = {
+      INR: { code: 'INR', symbol: '₹', rate: 1.0 },
+      USD: { code: 'USD', symbol: '$', rate: 0.0116 },
+      EUR: { code: 'EUR', symbol: '€', rate: 0.0108 },
+      GBP: { code: 'GBP', symbol: '£', rate: 0.0093 },
+      AED: { code: 'AED', symbol: 'AED ', rate: 0.0425 },
+      CAD: { code: 'CAD', symbol: 'CA$', rate: 0.0162 }
+    };
+    let currentCurrency = 'INR';
+
+    function formatPrice(inrAmount) {
+      const c = CURRENCIES[currentCurrency] || CURRENCIES.INR;
+      const converted = inrAmount * c.rate;
+      if (currentCurrency === 'INR') {
+        return '₹' + Math.round(converted).toLocaleString('en-IN');
+      }
+      return c.symbol + converted.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // --- SEED PRODUCTS ---
+    const PRODUCTS = [
+      {
+        id: 'p1',
+        title: 'Apple iPhone 16 Pro (128 GB) - Desert Titanium',
+        category: 'Electronics',
+        brand: 'Apple',
+        image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80',
+        rating: 4.8,
+        reviewsCount: 3412,
+        description: 'A18 Pro chip with 6-core GPU, Grade 5 Titanium design, 48MP Fusion camera with 4K 120 fps Dolby Vision.',
+        features: ['Grade 5 Titanium Body', '48MP 5x Telephoto', 'A18 Pro Bionic'],
+        lowestHistorical: 114900,
+        highestHistorical: 119900,
+        averagePrice: 117500,
+        priceHistory: [
+          { date: '15 Oct', price: 119900 },
+          { date: '25 Oct', price: 117990 },
+          { date: 'Today', price: 114990 }
+        ],
+        dealVerdict: { status: 'STEAL DEAL 🔥', text: 'Flipkart is lowest recorded with SBI/ICICI card cashback!' },
+        priceOptions: [
+          { storeId: 'flipkart', price: 114990, originalPrice: 119900, discount: 4, delivery: 'Tomorrow by 2 PM', deliveryFee: 0, bankOffer: 'Flat ₹5,000 instant off on SBI/ICICI', coupon: 'SUPERDEAL500', isLowest: true, url: 'https://www.flipkart.com/search?q=iphone+16+pro' },
+          { storeId: 'amazon', price: 115900, originalPrice: 119900, discount: 3, delivery: 'Tomorrow morning with Prime', deliveryFee: 0, bankOffer: '₹4,000 instant off on HDFC', coupon: '', url: 'https://www.amazon.in/s?k=iphone+16+pro' },
+          { storeId: 'blinkit', price: 119900, originalPrice: 119900, discount: 0, delivery: '⚡ In 11 minutes to doorstep', deliveryFee: 15, isFastest: true, bankOffer: '₹3,000 cashback via Blinkit UPI', url: 'https://blinkit.com/s/?q=iphone+16+pro' },
+          { storeId: 'bigbasket', price: 118490, originalPrice: 119900, discount: 1, delivery: 'Today by 8 PM slot', deliveryFee: 0, bankOffer: '5% Tata Neu Coins', url: 'https://www.bigbasket.com/ps/?q=iphone+16+pro' }
+        ]
+      },
+      {
+        id: 'p2',
+        title: 'Fortune Sunlite Refined Sunflower Oil Jar, 5 Litres',
+        category: 'Groceries',
+        brand: 'Fortune',
+        image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=800&q=80',
+        rating: 4.6,
+        reviewsCount: 9284,
+        description: 'Enriched with Vitamin A and D, light and easy to digest cooking oil with high smoke point for daily Indian meals.',
+        features: ['5L Easy Pour Can', 'Zero Cholesterol', 'Triple Refined'],
+        lowestHistorical: 625,
+        highestHistorical: 780,
+        averagePrice: 695,
+        priceHistory: [
+          { date: '15 Oct', price: 710 },
+          { date: '25 Oct', price: 680 },
+          { date: 'Today', price: 625 }
+        ],
+        dealVerdict: { status: 'STEAL DEAL 🔥', text: 'BigBasket & Blinkit running fierce weekend wars. BigBasket cheapest for bulk!' },
+        priceOptions: [
+          { storeId: 'bigbasket', price: 625, originalPrice: 765, discount: 18, delivery: 'Today 4 PM - 7 PM', deliveryFee: 0, bankOffer: 'Flat ₹50 off with HDFC PayZapp', coupon: 'BBFRESH50', isLowest: true, url: 'https://www.bigbasket.com/ps/?q=fortune+sunflower+oil+5l' },
+          { storeId: 'blinkit', price: 639, originalPrice: 765, discount: 16, delivery: '⚡ In 9 minutes delivery', deliveryFee: 10, isFastest: true, bankOffer: 'Instant 10% back on CRED Pay', url: 'https://blinkit.com/s/?q=fortune+sunflower+oil+5l' },
+          { storeId: 'amazon', price: 660, originalPrice: 765, discount: 14, delivery: 'Tomorrow 7 AM - 9 AM Fresh', deliveryFee: 0, bankOffer: '5% cashback Amazon Pay ICICI', url: 'https://www.amazon.in/s?k=fortune+sunflower+oil+5l' },
+          { storeId: 'flipkart', price: 670, originalPrice: 765, discount: 12, delivery: 'Tomorrow by Evening', deliveryFee: 29, url: 'https://www.flipkart.com/search?q=fortune+sunflower+oil+5l' },
+          { storeId: 'meesho', price: 699, originalPrice: 765, discount: 9, delivery: '3-4 Days Free Delivery', deliveryFee: 0, url: 'https://www.meesho.com/search?q=sunflower+oil+5l' }
+        ]
+      },
+      {
+        id: 'p3',
+        title: 'boAt Rockerz 450 Bluetooth On-Ear Headphones with 15H Playback',
+        category: 'Electronics',
+        brand: 'boAt',
+        image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80',
+        rating: 4.4,
+        reviewsCount: 42100,
+        description: '40mm Dynamic Drivers for punchy boAt signature sound, cushioned earcups, dual Bluetooth and AUX modes.',
+        features: ['15 Hours Playback', '40mm Bass Drivers', 'Dual BT + AUX'],
+        lowestHistorical: 1199,
+        highestHistorical: 1999,
+        averagePrice: 1499,
+        priceHistory: [
+          { date: '15 Oct', price: 1499 },
+          { date: '25 Oct', price: 1349 },
+          { date: 'Today', price: 1249 }
+        ],
+        dealVerdict: { status: 'GOOD DISCOUNT 👍', text: 'Flipkart matching lowest festive price at ₹1,249.' },
+        priceOptions: [
+          { storeId: 'flipkart', price: 1249, originalPrice: 3990, discount: 69, delivery: 'Tomorrow by 5 PM', deliveryFee: 0, bankOffer: '5% cashback on Flipkart Axis Bank', coupon: 'AUDIO50', isLowest: true, url: 'https://www.flipkart.com/search?q=boat+rockerz+450' },
+          { storeId: 'amazon', price: 1299, originalPrice: 3990, discount: 67, delivery: 'Tomorrow Morning with Prime', deliveryFee: 0, bankOffer: 'Flat ₹100 cashback via Amazon Pay', url: 'https://www.amazon.in/s?k=boat+rockerz+450' },
+          { storeId: 'blinkit', price: 1449, originalPrice: 3990, discount: 64, delivery: '⚡ 14 mins instant delivery', deliveryFee: 15, isFastest: true, url: 'https://blinkit.com/s/?q=boat+rockerz+450' },
+          { storeId: 'myntra', price: 1399, originalPrice: 3990, discount: 65, delivery: '2 Days Delivery', deliveryFee: 0, url: 'https://www.myntra.com/boat-rockerz-450' },
+          { storeId: 'meesho', price: 1199, originalPrice: 3990, discount: 70, delivery: '4-5 Days Delivery', deliveryFee: 0, url: 'https://www.meesho.com/search?q=boat+rockerz+450' }
+        ]
+      },
+      {
+        id: 'p4',
+        title: 'Cadbury Dairy Milk Silk Hazelnut Chocolate Bar, 143g',
+        category: 'Groceries',
+        brand: 'Cadbury',
+        image: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=800&q=80',
+        rating: 4.8,
+        reviewsCount: 15400,
+        description: 'Delectable whole Turkish hazelnuts enveloped in classic creamy Cadbury Silk milk chocolate with insulated cold packing.',
+        features: ['Real Whole Hazelnuts', 'Rich Smooth Creamy', 'Insulated Cool-Gel Pack'],
+        lowestHistorical: 155,
+        highestHistorical: 195,
+        averagePrice: 180,
+        priceHistory: [
+          { date: '15 Oct', price: 185 },
+          { date: '25 Oct', price: 170 },
+          { date: 'Today', price: 155 }
+        ],
+        dealVerdict: { status: 'STEAL DEAL 🔥', text: 'Blinkit flash offer (₹155) plus 10-minute chilled delivery!' },
+        priceOptions: [
+          { storeId: 'blinkit', price: 155, originalPrice: 195, discount: 21, delivery: '⚡ In 10 minutes cold-pack', deliveryFee: 10, isLowest: true, isFastest: true, bankOffer: 'Flat ₹25 cashback via Paytm UPI', url: 'https://blinkit.com/s/?q=cadbury+silk+hazelnut' },
+          { storeId: 'bigbasket', price: 162, originalPrice: 195, discount: 17, delivery: 'Today by 5:30 PM', deliveryFee: 0, bankOffer: '5% NeuCoins', coupon: 'SWEET15', url: 'https://www.bigbasket.com/ps/?q=cadbury+silk+hazelnut' },
+          { storeId: 'amazon', price: 169, originalPrice: 195, discount: 13, delivery: 'Tomorrow by 8 AM Fresh', deliveryFee: 0, url: 'https://www.amazon.in/s?k=cadbury+silk+hazelnut' },
+          { storeId: 'flipkart', price: 175, originalPrice: 195, discount: 10, delivery: 'Tomorrow Afternoon', deliveryFee: 29, url: 'https://www.flipkart.com/search?q=cadbury+silk+hazelnut' }
+        ]
+      },
+      {
+        id: 'p5',
+        title: 'Nike Air Jordan 1 Low Retro Sneakers - White / Gym Red',
+        category: 'Fashion',
+        brand: 'Nike',
+        image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80',
+        rating: 4.9,
+        reviewsCount: 1845,
+        description: 'Iconic encapsulated Air-Sole unit provides lightweight cushioning. Genuine leather upper for classic basketball aesthetic.',
+        features: ['Encapsulated Air-Sole', 'Full Grain Leather', 'Solid Rubber Outsole'],
+        lowestHistorical: 7495,
+        highestHistorical: 8995,
+        averagePrice: 8295,
+        priceHistory: [
+          { date: '15 Oct', price: 8995 },
+          { date: '25 Oct', price: 8295 },
+          { date: 'Today', price: 7695 }
+        ],
+        dealVerdict: { status: 'GOOD DISCOUNT 👍', text: 'Myntra has brand verification guarantee + 10% instant card discount.' },
+        priceOptions: [
+          { storeId: 'myntra', price: 7695, originalPrice: 8995, discount: 14, delivery: 'Day After Tomorrow by 3 PM', deliveryFee: 0, isLowest: true, bankOffer: '10% instant off on Axis & Kotak', coupon: 'MYNTRAJORDAN', url: 'https://www.myntra.com/air-jordan-1-low' },
+          { storeId: 'flipkart', price: 7895, originalPrice: 8995, discount: 12, delivery: 'Within 2 Days', deliveryFee: 0, bankOffer: '₹750 off with ICICI Credit Card', url: 'https://www.flipkart.com/search?q=nike+air+jordan+1+low' },
+          { storeId: 'amazon', price: 8195, originalPrice: 8995, discount: 9, delivery: 'Tomorrow with Prime', deliveryFee: 0, isFastest: true, url: 'https://www.amazon.in/s?k=nike+air+jordan+1+low' },
+          { storeId: 'meesho', price: 2199, originalPrice: 4999, discount: 56, delivery: '5-6 Days Delivery', deliveryFee: 0, url: 'https://www.meesho.com/search?q=air+jordan+retro' }
+        ]
+      },
+      {
+        id: 'p6',
+        title: 'Cetaphil Gentle Skin Cleanser for Sensitive Skin, 500ml',
+        category: 'Personal Care',
+        brand: 'Cetaphil',
+        image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80',
+        rating: 4.7,
+        reviewsCount: 28900,
+        description: 'Dermatologist-recommended hydrating formula with Niacinamide, Panthenol, and Glycerin. Soap-free, fragrance-free.',
+        features: ['Soap-Free Formula', 'Natural Skin Barrier', 'Hypoallergenic'],
+        lowestHistorical: 799,
+        highestHistorical: 1120,
+        averagePrice: 940,
+        priceHistory: [
+          { date: '15 Oct', price: 1049 },
+          { date: '25 Oct', price: 899 },
+          { date: 'Today', price: 799 }
+        ],
+        dealVerdict: { status: 'STEAL DEAL 🔥', text: 'Amazon matching Myntra Beauty festival prices with 29% discount!' },
+        priceOptions: [
+          { storeId: 'amazon', price: 799, originalPrice: 1120, discount: 29, delivery: 'Tomorrow 11 AM with Prime', deliveryFee: 0, isLowest: true, bankOffer: '10% instant off with ICICI', coupon: 'CLEANSE10', url: 'https://www.amazon.in/s?k=cetaphil+gentle+skin+cleanser+500ml' },
+          { storeId: 'myntra', price: 819, originalPrice: 1120, discount: 27, delivery: 'Within 2 Days', deliveryFee: 0, bankOffer: '15% cashback Myntra Kotak card', url: 'https://www.myntra.com/cetaphil-gentle-skin-cleanser-500ml' },
+          { storeId: 'flipkart', price: 849, originalPrice: 1120, discount: 24, delivery: 'Tomorrow Evening', deliveryFee: 0, url: 'https://www.flipkart.com/search?q=cetaphil+gentle+skin+cleanser+500ml' },
+          { storeId: 'blinkit', price: 899, originalPrice: 1120, discount: 20, delivery: '⚡ In 12 minutes to door', deliveryFee: 15, isFastest: true, url: 'https://blinkit.com/s/?q=cetaphil+cleanser+500ml' }
+        ]
+      },
+      {
+        id: 'p7',
+        title: 'Surf Excel Matic Top Load Detergent Liquid, 2L Pouch',
+        category: 'Home & Kitchen',
+        brand: 'Surf Excel',
+        image: 'https://images.unsplash.com/photo-1585421514738-01798e348b17?auto=format&fit=crop&w=800&q=80',
+        rating: 4.7,
+        reviewsCount: 38200,
+        description: 'Superior liquid formula dissolves 100% in water without leaving chalky residue on clothes. Engineered for top loaders.',
+        features: ['100% Dissolvable', 'Top Load Machine Spec', 'Fabric Protection'],
+        lowestHistorical: 380,
+        highestHistorical: 480,
+        averagePrice: 425,
+        priceHistory: [
+          { date: '15 Oct', price: 440 },
+          { date: '25 Oct', price: 410 },
+          { date: 'Today', price: 389 }
+        ],
+        dealVerdict: { status: 'GOOD DISCOUNT 👍', text: 'BigBasket lowest for planned grocery, Blinkit in 11 mins for urgent wash.' },
+        priceOptions: [
+          { storeId: 'bigbasket', price: 389, originalPrice: 480, discount: 19, delivery: 'Today by 6:00 PM', deliveryFee: 0, isLowest: true, bankOffer: 'Flat ₹40 off over ₹800', coupon: 'CLEAN40', url: 'https://www.bigbasket.com/ps/?q=surf+excel+matic+liquid+2l' },
+          { storeId: 'blinkit', price: 395, originalPrice: 480, discount: 18, delivery: '⚡ In 11 minutes', deliveryFee: 10, isFastest: true, bankOffer: 'Instant ₹30 back on CRED', url: 'https://blinkit.com/s/?q=surf+excel+matic+liquid+2l' },
+          { storeId: 'amazon', price: 405, originalPrice: 480, discount: 16, delivery: 'Tomorrow by 9 AM', deliveryFee: 0, url: 'https://www.amazon.in/s?k=surf+excel+matic+liquid+2l' },
+          { storeId: 'meesho', price: 429, originalPrice: 480, discount: 11, delivery: '4-5 Days Delivery', deliveryFee: 0, url: 'https://www.meesho.com/search?q=surf+excel+liquid+2l' }
+        ]
+      },
+      {
+        id: 'p8',
+        title: "Levi's Men 511 Slim Fit Mid Rise Stretch Jeans",
+        category: 'Fashion',
+        brand: "Levi's",
+        image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=80',
+        rating: 4.5,
+        reviewsCount: 6120,
+        description: 'Modern slim with room to move. Added stretch for all-day comfort. Iconic red tab, leather patch on waistband.',
+        features: ['99% Cotton 1% Elastane', 'Slim Fit Through Thigh', 'Original Red Tab'],
+        lowestHistorical: 1699,
+        highestHistorical: 3599,
+        averagePrice: 2299,
+        priceHistory: [
+          { date: '15 Oct', price: 2499 },
+          { date: '25 Oct', price: 2099 },
+          { date: 'Today', price: 1749 }
+        ],
+        dealVerdict: { status: 'STEAL DEAL 🔥', text: 'Myntra running 51% off original Levi’s denim!' },
+        priceOptions: [
+          { storeId: 'myntra', price: 1749, originalPrice: 3599, discount: 51, delivery: 'Tomorrow by 4 PM', deliveryFee: 0, isLowest: true, isFastest: true, bankOffer: '10% off with Federal & Axis', coupon: 'MYNTRA500', url: 'https://www.myntra.com/levis-511-slim-fit-jeans' },
+          { storeId: 'flipkart', price: 1999, originalPrice: 3599, discount: 44, delivery: 'Within 2 Days', deliveryFee: 0, url: 'https://www.flipkart.com/search?q=levis+511+slim+fit+jeans' },
+          { storeId: 'amazon', price: 2099, originalPrice: 3599, discount: 42, delivery: '2 Days Delivery Prime', deliveryFee: 0, url: 'https://www.amazon.in/s?k=levis+511+slim+fit+jeans' },
+          { storeId: 'meesho', price: 699, originalPrice: 1999, discount: 65, delivery: '4-5 Days Delivery', deliveryFee: 0, url: 'https://www.meesho.com/search?q=mens+slim+fit+jeans' }
+        ]
+      }
+    ];
+
+    // --- APPLICATION STATE ---
+    let currentCategory = 'All';
+    let currentSearch = '';
+    let currentSort = 'cheapest';
+
+    // Basket state
+    let basket = [
+      { product: PRODUCTS[1], quantity: 1 }, // Fortune oil
+      { product: PRODUCTS[3], quantity: 2 }  // Cadbury silk
+    ];
+
+    // Alerts state
+    let activeAlert = {
+      productId: 'p2',
+      product: PRODUCTS[1],
+      targetPrice: 599,
+      currentPrice: 625,
+      store: 'BigBasket'
+    };
+
+    // --- AUDIO NOTIFICATION CHIME (WEB AUDIO API) ---
+    function playChime() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const now = ctx.currentTime;
+        const osc1 = ctx.createOscillator();
+        const osc2 = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(587.33, now); // D5
+        osc1.frequency.exponentialRampToValueAtTime(880, now + 0.15); // A5
+
+        osc2.type = 'triangle';
+        osc2.frequency.setValueAtTime(880, now + 0.15);
+        osc2.frequency.exponentialRampToValueAtTime(1174.66, now + 0.35); // D6
+
+        gain.gain.setValueAtTime(0.01, now);
+        gain.gain.linearRampToValueAtTime(0.25, now + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc1.start(now);
+        osc2.start(now + 0.15);
+        osc1.stop(now + 0.2);
+        osc2.stop(now + 0.5);
+      } catch (err) {
+        console.log('Audio chime error:', err);
+      }
+    }
+
+    // --- RENDER CATEGORIES ---
+    const categories = [
+      { id: 'All', label: 'All Categories', icon: '✨' },
+      { id: 'Groceries', label: '⚡ Quick Grocery & Supermarket', icon: '🥑' },
+      { id: 'Electronics', label: '📱 Electronics & Gadgets', icon: '💻' },
+      { id: 'Fashion', label: '👗 Fashion & Footwear', icon: '👟' },
+      { id: 'Personal Care', label: '🧴 Beauty & Personal Care', icon: '✨' },
+      { id: 'Home & Kitchen', label: '🏠 Home & Household', icon: '🧼' }
+    ];
+
+    function renderCategories() {
+      const container = document.getElementById('categoryContainer');
+      container.innerHTML = categories.map(cat => `
+        <button onclick="selectCategory('${cat.id}')" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer ${
+          currentCategory === cat.id
+            ? 'bg-slate-900 text-white shadow-xs'
+            : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+        }">
+          <span>${cat.icon}</span>
+          <span>${cat.label}</span>
+        </button>
+      `).join('');
+    }
+
+    function selectCategory(catId) {
+      currentCategory = catId;
+      renderCategories();
+      renderProducts();
+    }
+
+    // --- RENDER FLASH DEALS ---
+    function renderFlashDeals() {
+      const deals = [];
+      PRODUCTS.forEach(p => {
+        p.priceOptions.forEach(opt => {
+          if (opt.discount >= 20) {
+            deals.push({ product: p, opt: opt });
+          }
+        });
+      });
+      deals.sort((a, b) => b.opt.discount - a.opt.discount);
+
+      const grid = document.getElementById('flashDealsGrid');
+      grid.innerHTML = deals.slice(0, 4).map(item => {
+        const store = STORES[item.opt.storeId];
+        return `
+          <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded ${store.badgeColor}">${store.name}</span>
+                <span class="text-[11px] font-extrabold text-rose-600 bg-rose-50 px-2 py-0.5 rounded">${item.opt.discount}% OFF</span>
+              </div>
+              <div class="flex items-center gap-2.5 mb-2">
+                <img src="${item.product.image}" class="w-12 h-12 object-contain rounded-lg bg-slate-50 p-1 shrink-0" alt="">
+                <div class="min-w-0">
+                  <h5 class="text-xs font-semibold text-slate-900 line-clamp-2">${item.product.title}</h5>
+                  <div class="text-[10px] text-slate-400 mt-0.5">${item.opt.delivery}</div>
+                </div>
+              </div>
+              <div class="flex items-baseline gap-2 mt-1">
+                <span class="text-sm font-extrabold text-slate-950">${formatPrice(item.opt.price)}</span>
+                <span class="text-xs text-slate-400 line-through">${formatPrice(item.opt.originalPrice)}</span>
+              </div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between">
+              <button onclick="addToBasket('${item.product.id}')" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 cursor-pointer">+ Basket</button>
+              <a href="${item.opt.url}" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-800 flex items-center gap-1">Buy ↗</a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // --- RENDER PRODUCTS LIST ---
+    function renderProducts() {
+      let filtered = PRODUCTS.filter(p => {
+        if (currentCategory !== 'All' && p.category !== currentCategory) return false;
+        if (currentSearch.trim()) {
+          const q = currentSearch.toLowerCase();
+          const matchTitle = p.title.toLowerCase().includes(q);
+          const matchBrand = p.brand.toLowerCase().includes(q);
+          if (!matchTitle && !matchBrand) return false;
+        }
+        return true;
+      });
+
+      filtered.sort((a, b) => {
+        const minA = Math.min(...a.priceOptions.map(o => o.price));
+        const minB = Math.min(...b.priceOptions.map(o => o.price));
+        const discA = Math.max(...a.priceOptions.map(o => o.discount));
+        const discB = Math.max(...b.priceOptions.map(o => o.discount));
+        if (currentSort === 'cheapest') return minA - minB;
+        if (currentSort === 'discount') return discB - discA;
+        if (currentSort === 'rating') return b.rating - a.rating;
+        return 0;
+      });
+
+      document.getElementById('resultsCountBadge').innerText = `${filtered.length} Results`;
+      const container = document.getElementById('productsList');
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="p-12 text-center bg-white rounded-2xl border border-slate-200">
+            <div class="text-4xl mb-2">🔍</div>
+            <h4 class="font-bold text-slate-800">No products matching "${currentSearch}"</h4>
+            <p class="text-xs text-slate-500 mt-1">Try another search term or click 'All Categories'.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(prod => {
+        const sortedOpts = [...prod.priceOptions].sort((a, b) => a.price - b.price);
+        const lowestOpt = sortedOpts[0];
+        const highestOpt = sortedOpts[sortedOpts.length - 1];
+        const maxSave = highestOpt ? highestOpt.price - lowestOpt.price : 0;
+        const inBasket = basket.find(it => it.product.id === prod.id);
+
+        return `
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all overflow-hidden flex flex-col">
+            ${maxSave > 0 ? `
+              <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xs font-semibold px-4 py-1.5 flex items-center justify-between">
+                <span>Save up to ${formatPrice(maxSave)} across stores!</span>
+                <span class="text-[11px] bg-white/20 px-2 py-0.5 rounded-full">Live Discounter</span>
+              </div>
+            ` : ''}
+
+            <div class="p-5 sm:p-6 flex flex-col lg:flex-row gap-6">
+              <!-- Media & Actions -->
+              <div class="lg:w-72 shrink-0 flex flex-col items-center">
+                <div class="relative w-full aspect-square max-w-[240px] rounded-xl overflow-hidden bg-slate-100 p-2 border border-slate-200 flex items-center justify-center">
+                  <img src="${prod.image}" class="w-full h-full object-contain rounded-lg" alt="${prod.title}">
+                  <span class="absolute top-3 left-3 bg-slate-900/80 text-white text-[11px] font-medium px-2 py-0.5 rounded-md">${prod.category}</span>
+                </div>
+
+                <div class="mt-3 flex flex-wrap gap-1 justify-center max-w-[260px]">
+                  ${prod.features.map(f => `
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-medium">✓ ${f}</span>
+                  `).join('')}
+                </div>
+
+                <div class="w-full mt-4 flex flex-col gap-2">
+                  <button onclick="addToBasket('${prod.id}')" class="w-full py-2.5 px-3 rounded-xl font-medium text-xs flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                    inBasket ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm'
+                  }">
+                    <span>🛒</span>
+                    <span>${inBasket ? `In Basket (${inBasket.quantity}) • Add Another` : 'Add to Multi-Store Basket'}</span>
+                  </button>
+
+                  <button onclick="openAlertModalForProduct('${prod.id}')" class="w-full py-2 px-3 rounded-xl font-medium text-xs flex items-center justify-center gap-2 border border-slate-300 hover:bg-slate-50 text-slate-700 cursor-pointer">
+                    <span>🔔</span>
+                    <span>Set Price Drop Alert</span>
+                  </button>
+
+                  <button onclick="toggleTrendChart('${prod.id}')" class="w-full py-1.5 px-3 rounded-lg text-xs flex items-center justify-center gap-1 text-slate-500 hover:text-slate-800 cursor-pointer">
+                    <span>View 30-Day Trend & Deal Verdict</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Product Info & Store Matrix -->
+              <div class="flex-1 flex flex-col min-w-0">
+                <div class="flex flex-col gap-1 mb-3">
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs font-semibold tracking-wider uppercase text-indigo-600">${prod.brand}</span>
+                    <div class="flex items-center gap-1 text-xs text-amber-500 font-semibold bg-amber-500/10 px-2 py-0.5 rounded">
+                      <span>★ ${prod.rating}</span>
+                      <span class="text-slate-400 text-[11px]">(${prod.reviewsCount.toLocaleString()})</span>
+                    </div>
+                  </div>
+                  <h3 class="text-base sm:text-lg font-bold text-slate-900 leading-snug">${prod.title}</h3>
+                  <p class="text-xs text-slate-500 line-clamp-2 mt-0.5">${prod.description}</p>
+                </div>
+
+                <!-- Stores Comparison List -->
+                <div class="flex flex-col gap-2.5 mt-2">
+                  <div class="flex items-center justify-between text-xs font-semibold text-slate-500 px-1">
+                    <span>STORE COMPARISON (RANKED BY CHEAPEST)</span>
+                    <span>DELIVERY & OFFERS</span>
+                  </div>
+
+                  <div class="grid grid-cols-1 gap-2.5">
+                    ${sortedOpts.map((opt, idx) => {
+                      const store = STORES[opt.storeId];
+                      const isCheapest = idx === 0;
+
+                      return `
+                        <div class="p-3.5 rounded-xl border transition-all ${
+                          isCheapest ? 'border-emerald-500 bg-emerald-500/[0.04] ring-1 ring-emerald-500/20' : 'border-slate-200 bg-white hover:border-slate-300'
+                        }">
+                          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                              <div>
+                                <div class="flex items-center gap-2">
+                                  <span class="text-[11px] font-bold px-2 py-0.5 rounded ${store.badgeColor}">${store.name}</span>
+                                  ${isCheapest ? '<span class="text-[10px] font-bold uppercase bg-emerald-600 text-white px-2 py-0.5 rounded-full">✓ Best Price</span>' : ''}
+                                  ${opt.isFastest ? '<span class="text-[10px] font-bold uppercase bg-amber-500 text-slate-950 px-2 py-0.5 rounded-full">⚡ Fastest</span>' : ''}
+                                </div>
+                                <div class="text-xs text-slate-600 mt-1">
+                                  <span class="font-medium">${opt.delivery}</span>
+                                  ${opt.deliveryFee === 0 ? '<span class="text-emerald-600 font-semibold">• Free Shipping</span>' : `<span class="text-slate-400">• +${formatPrice(opt.deliveryFee)} delivery</span>`}
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="flex items-center justify-between sm:justify-end gap-4 shrink-0">
+                              <div class="flex flex-col items-end gap-0.5">
+                                <div class="flex items-baseline gap-2">
+                                  <span class="text-base sm:text-lg font-extrabold text-slate-950">${formatPrice(opt.price)}</span>
+                                  ${opt.originalPrice > opt.price ? `<span class="text-xs text-slate-400 line-through">${formatPrice(opt.originalPrice)}</span>` : ''}
+                                  ${opt.discount > 0 ? `<span class="text-xs font-bold text-emerald-600">${opt.discount}% OFF</span>` : ''}
+                                </div>
+                                ${opt.coupon ? `<span class="text-[10px] bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded border border-indigo-200 font-semibold">Coupon: ${opt.coupon}</span>` : ''}
+                                ${opt.bankOffer ? `<span class="text-[10px] text-slate-500 truncate max-w-[180px]">${opt.bankOffer}</span>` : ''}
+                              </div>
+
+                              <a href="${opt.url}" target="_blank" rel="noopener" class="px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs ${
+                                isCheapest ? 'bg-emerald-600 hover:bg-emerald-700 text-white' : 'bg-slate-100 hover:bg-slate-200 text-slate-800'
+                              }">
+                                <span>Buy ↗</span>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      `;
+                    }).join('')}
+                  </div>
+                </div>
+
+                <!-- 30-Day SVG Trend (Expandable) -->
+                <div id="trendChart_${prod.id}" class="hidden mt-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                  <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-200">
+                    <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full">${prod.dealVerdict.status}</span>
+                    <span class="text-xs text-slate-500">30-Day Market Intelligence</span>
+                  </div>
+                  <p class="text-xs text-slate-600 mb-3 bg-white p-2.5 rounded-lg border border-slate-200">💡 ${prod.dealVerdict.text}</p>
+                  
+                  <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                    <div class="p-2 rounded-lg bg-white border border-slate-200">
+                      <div class="text-[10px] text-slate-400 uppercase font-semibold">All-Time Low</div>
+                      <div class="font-bold text-slate-900">${formatPrice(prod.lowestHistorical)}</div>
+                    </div>
+                    <div class="p-2 rounded-lg bg-white border border-slate-200">
+                      <div class="text-[10px] text-slate-400 uppercase font-semibold">30-Day Average</div>
+                      <div class="font-bold text-slate-900">${formatPrice(prod.averagePrice)}</div>
+                    </div>
+                    <div class="p-2 rounded-lg bg-white border border-slate-200">
+                      <div class="text-[10px] text-slate-400 uppercase font-semibold">Peak Price</div>
+                      <div class="font-bold text-slate-900">${formatPrice(prod.highestHistorical)}</div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleTrendChart(prodId) {
+      const el = document.getElementById(`trendChart_${prodId}`);
+      if (el) el.classList.toggle('hidden');
+    }
+
+    // --- SEARCH & SORT CONTROLS ---
+    function handleSearchInput(val) {
+      currentSearch = val;
+      renderProducts();
+    }
+
+    function executeSearch() {
+      const val = document.getElementById('searchInput').value;
+      currentSearch = val;
+      renderProducts();
+    }
+
+    function handleSortChange(sortVal) {
+      currentSort = sortVal;
+      renderProducts();
+    }
+
+    function changeCurrency(newCurr) {
+      currentCurrency = newCurr;
+      renderProducts();
+      renderFlashDeals();
+      updateBasketCounters();
+      renderBasketModal();
+    }
+
+    // --- BASKET LOGIC ---
+    function addToBasket(prodId) {
+      const prod = PRODUCTS.find(p => p.id === prodId);
+      if (!prod) return;
+      const existing = basket.find(it => it.product.id === prodId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        basket.push({ product: prod, quantity: 1 });
+      }
+      updateBasketCounters();
+      renderProducts();
+      showToastNotification(`Added "${prod.title.slice(0, 25)}..." to Multi-Store Basket!`);
+    }
+
+    function updateBasketItemQuantity(prodId, qty) {
+      if (qty <= 0) {
+        basket = basket.filter(it => it.product.id !== prodId);
+      } else {
+        const item = basket.find(it => it.product.id === prodId);
+        if (item) item.quantity = qty;
+      }
+      updateBasketCounters();
+      renderBasketModal();
+      renderProducts();
+    }
+
+    function updateBasketCounters() {
+      const totalItems = basket.reduce((acc, it) => acc + it.quantity, 0);
+      document.getElementById('basketBadge').innerText = totalItems;
+      document.getElementById('floatingBasketTitle').innerText = `${totalItems} Items in Multi-Store Cart`;
+
+      // Subtotal of cheapest options
+      const subtotal = basket.reduce((acc, it) => {
+        const minP = Math.min(...it.product.priceOptions.map(o => o.price));
+        return acc + minP * it.quantity;
+      }, 0);
+      document.getElementById('basketSubtotalText').innerText = formatPrice(subtotal);
+
+      const floatBar = document.getElementById('floatingBasketBar');
+      if (totalItems > 0) {
+        floatBar.classList.remove('hidden');
+      } else {
+        floatBar.classList.add('hidden');
+      }
+    }
+
+    let basketStrategy = 'split';
+    function setBasketStrategy(strat) {
+      basketStrategy = strat;
+      const splitBtn = document.getElementById('stratSplitBtn');
+      const singleBtn = document.getElementById('stratSingleBtn');
+      if (strat === 'split') {
+        splitBtn.className = 'px-3 py-1.5 rounded-lg bg-white text-emerald-900 shadow-xs cursor-pointer';
+        singleBtn.className = 'px-3 py-1.5 rounded-lg text-emerald-100 hover:text-white cursor-pointer';
+      } else {
+        singleBtn.className = 'px-3 py-1.5 rounded-lg bg-white text-emerald-900 shadow-xs cursor-pointer';
+        splitBtn.className = 'px-3 py-1.5 rounded-lg text-emerald-100 hover:text-white cursor-pointer';
+      }
+      renderBasketModal();
+    }
+
+    function openBasketModal() {
+      renderBasketModal();
+      document.getElementById('basketModal').classList.remove('hidden');
+    }
+
+    function closeBasketModal() {
+      document.getElementById('basketModal').classList.add('hidden');
+    }
+
+    function renderBasketModal() {
+      const listEl = document.getElementById('basketItemsList');
+      const totalItems = basket.reduce((acc, it) => acc + it.quantity, 0);
+      document.getElementById('basketModalCount').innerText = `${totalItems} Products`;
+
+      if (basket.length === 0) {
+        listEl.innerHTML = '<div class="p-6 text-center text-slate-400">Basket is empty.</div>';
+        return;
+      }
+
+      listEl.innerHTML = basket.map(it => {
+        const sorted = [...it.product.priceOptions].sort((a, b) => a.price - b.price);
+        const best = sorted[0];
+        return `
+          <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+              <img src="${it.product.image}" class="w-10 h-10 object-contain rounded-lg bg-white p-1 border border-slate-200 shrink-0" alt="">
+              <div class="min-w-0">
+                <h5 class="text-xs font-semibold text-slate-900 truncate">${it.product.title}</h5>
+                <div class="text-[11px] text-slate-500">Best on <b>${best.storeId}</b>: <b class="text-emerald-600">${formatPrice(best.price)}</b></div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="flex items-center border border-slate-300 rounded-lg bg-white">
+                <button onclick="updateBasketItemQuantity('${it.product.id}', ${it.quantity - 1})" class="px-2 py-0.5 font-bold hover:bg-slate-100 text-slate-600">-</button>
+                <span class="px-2 text-xs font-bold text-slate-900">${it.quantity}</span>
+                <button onclick="updateBasketItemQuantity('${it.product.id}', ${it.quantity + 1})" class="px-2 py-0.5 font-bold hover:bg-slate-100 text-slate-600">+</button>
+              </div>
+              <span class="text-xs font-bold text-slate-900 w-16 text-right">${formatPrice(best.price * it.quantity)}</span>
+              <button onclick="updateBasketItemQuantity('${it.product.id}', 0)" class="text-slate-400 hover:text-rose-500 text-xs font-bold cursor-pointer">✕</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Calculation for split strategy
+      const splitTotal = basket.reduce((acc, it) => {
+        const minP = Math.min(...it.product.priceOptions.map(o => o.price));
+        return acc + minP * it.quantity;
+      }, 0);
+
+      document.getElementById('optimalBasketSummary').innerText = `Cheapest Split Total: ${formatPrice(splitTotal)}`;
+
+      const detailsEl = document.getElementById('basketStrategyDetails');
+      if (basketStrategy === 'split') {
+        detailsEl.innerHTML = `
+          <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200">
+            <h5 class="font-bold text-emerald-900 text-xs mb-1">⚡ Optimal Cross-Store Split Savings</h5>
+            <p class="text-xs text-emerald-800">By splitting orders between Blinkit (instant 10m delivery) and BigBasket / Amazon (bulk discounted price), you save up to <b>18% extra</b> compared to buying entirely on a single store!</p>
+          </div>
+        `;
+      } else {
+        detailsEl.innerHTML = `
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <div class="text-[11px] font-bold text-amber-600">Amazon India</div>
+              <div class="text-sm font-extrabold mt-1">${formatPrice(splitTotal + 80)}</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <div class="text-[11px] font-bold text-blue-600">Flipkart</div>
+              <div class="text-sm font-extrabold mt-1">${formatPrice(splitTotal + 95)}</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <div class="text-[11px] font-bold text-emerald-600">BigBasket</div>
+              <div class="text-sm font-extrabold mt-1">${formatPrice(splitTotal + 40)}</div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // --- ALERTS LOGIC ---
+    function openAlertsModal() {
+      openAlertModalForProduct(activeAlert.productId);
+    }
+
+    function openAlertModalForProduct(prodId) {
+      const prod = PRODUCTS.find(p => p.id === prodId) || PRODUCTS[1];
+      const lowestP = Math.min(...prod.priceOptions.map(o => o.price));
+      const cardEl = document.getElementById('alertProductCard');
+      cardEl.innerHTML = `
+        <img src="${prod.image}" class="w-12 h-12 object-contain rounded-lg bg-white p-1 border border-slate-200" alt="">
+        <div>
+          <div class="text-xs font-semibold text-slate-900">${prod.title}</div>
+          <div class="text-xs text-slate-500 mt-0.5">Current Lowest: <b class="text-emerald-600">${formatPrice(lowestP)}</b></div>
+        </div>
+      `;
+      document.getElementById('targetPriceInput').value = Math.round(lowestP * 0.9);
+      activeAlert = { productId: prod.id, product: prod, currentPrice: lowestP, targetPrice: Math.round(lowestP * 0.9), store: 'BigBasket' };
+      document.getElementById('alertModal').classList.remove('hidden');
+    }
+
+    function closeAlertModal() {
+      document.getElementById('alertModal').classList.add('hidden');
+    }
+
+    function applyAlertDiscount(pct) {
+      const target = Math.round(activeAlert.currentPrice * (1 - pct / 100));
+      document.getElementById('targetPriceInput').value = target;
+      activeAlert.targetPrice = target;
+    }
+
+    function saveActiveAlert() {
+      const val = parseInt(document.getElementById('targetPriceInput').value);
+      if (val) activeAlert.targetPrice = val;
+      playChime();
+      closeAlertModal();
+      showToastNotification(`Price alert armed for target ${formatPrice(activeAlert.targetPrice)}!`);
+    }
+
+    function triggerSimulatedDrop() {
+      playChime();
+      closeAlertModal();
+      const toast = document.getElementById('alertToast');
+      document.getElementById('toastTitle').innerText = activeAlert.product.title;
+      document.getElementById('toastPrice').innerText = `Now ${formatPrice(activeAlert.targetPrice)}`;
+      document.getElementById('toastStore').innerText = `on ${activeAlert.store}`;
+      toast.classList.remove('hidden');
+    }
+
+    function hideToast() {
+      document.getElementById('alertToast').classList.add('hidden');
+    }
+
+    function showToastNotification(msg) {
+      // Small feedback
+      console.log(msg);
+    }
+
+    // --- ARCHITECTURE MODAL ---
+    function openArchitectureModal() {
+      document.getElementById('archModal').classList.remove('hidden');
+    }
+
+    function closeArchitectureModal() {
+      document.getElementById('archModal').classList.add('hidden');
+    }
+
+    // --- INITIALIZE ---
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCategories();
+      renderFlashDeals();
+      renderProducts();
+      updateBasketCounters();
+    });
+  </script>
+</body>
+</html>
